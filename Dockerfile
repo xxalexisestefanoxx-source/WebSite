@@ -1,7 +1,5 @@
 FROM php:8.2-apache
-RUN a2dismod mpm_event || true
-RUN a2dismod mpm_worker || true
-RUN a2dismod mpm_prefork || true
+RUN rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* /etc/apache2/mods-enabled/mpm_prefork.*
 RUN a2enmod mpm_prefork
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 COPY . /var/www/html/
